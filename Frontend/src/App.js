@@ -1,56 +1,57 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './Components/Login';
 import Dashboard from './Components/Dashboard';
 import Profile from './Components/Profile';
 import HealthReport from './Components/HealthReport';
 import Navbar from './Components/Navbar';
-import Register from './Components/Register'; // Ensure this is the correct path
+import Register from './Components/Register';
+import ChatBot from './Components/ChatBot';
+import Home from './Components/Home';
+import Getstarted from './Components/Getstarted';
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Set initial authentication state
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    // Check for authentication in local storage
     const storedAuth = localStorage.getItem('isAuthenticated');
     setIsAuthenticated(storedAuth === 'true');
   }, []);
 
-  const handleLogin = (email, password, navigate) => {
+  const handleLogin = (email, password) => {
     // Mock login logic (replace with actual authentication)
     setIsAuthenticated(true);
     localStorage.setItem('isAuthenticated', 'true'); // Store authentication status
-    navigate('/dashboard'); // Redirect to dashboard after login
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
     localStorage.setItem('isAuthenticated', 'false'); // Update authentication status
-    window.location.href = '/login'; // Redirect to login after logout
   };
 
   return (
-    <Router>
-      <Navbar onLogout={handleLogout} /> {/* Pass logout handler to Navbar */}
+    <>
+      <Navbar onLogout={handleLogout} isAuthenticated={isAuthenticated} />
       <Routes>
-        {/* Protected Routes */}
         {isAuthenticated ? (
           <>
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/chatbot" element={<ChatBot />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/report" element={<HealthReport />} />
-            <Route path="*" element={<Navigate to="/dashboard" />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/getstarted" element={<Getstarted />} />
+            <Route path="*" element={<Navigate to="/home" />} />
           </>
         ) : (
           <>
-            {/* Unauthenticated Routes */}
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
-            <Route path="/register" element={<Register />} /> {/* Register route */}
+            <Route path="/register" element={<Register />} />
             <Route path="*" element={<Navigate to="/login" />} />
           </>
         )}
       </Routes>
-    </Router>
+    </>
   );
 };
 
