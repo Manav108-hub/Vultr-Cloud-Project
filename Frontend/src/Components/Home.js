@@ -1,7 +1,6 @@
 import { ArrowRight, Activity, Heart, Brain, Stethoscope } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
 
 function Home() {
   const navigate = useNavigate();
@@ -11,7 +10,7 @@ function Home() {
   };
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-16 animate-fade-in">
       {/* Hero Section */}
       <section className="text-center space-y-8">
         <h1 className="text-5xl font-bold text-gray-900">
@@ -24,7 +23,7 @@ function Home() {
         <div className="flex justify-center gap-4">
           <Link
             to="/getstarted"
-            className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+            className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 transform hover:scale-105"
           >
             Get Started <ArrowRight className="h-5 w-5" />
           </Link>
@@ -56,7 +55,7 @@ function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section className="text-center space-y-8">
+      <section className="text-center space-y-8 animate-fade-in">
         <h2 className="text-3xl font-bold text-gray-900">How It Works</h2>
         <p className="text-gray-600 max-w-xl mx-auto">
           HealthMate simplifies the way you track and manage your health. Here's how you can get started in just a few steps.
@@ -69,7 +68,7 @@ function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-blue-50 rounded-2xl p-8 text-center">
+      <section className="bg-blue-50 rounded-2xl p-8 text-center animate-fade-in-up">
         <h2 className="text-3xl font-bold text-gray-900 mb-4">
           Ready to start your health journey?
         </h2>
@@ -77,8 +76,8 @@ function Home() {
           Join thousands of users who have transformed their health with HealthMate
         </p>
         <Link
-          to="/login" // Change the link to point to the login page
-          className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          to="/login"
+          className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors transform hover:scale-105"
         >
           Join Now <ArrowRight className="ml-2 h-5 w-5" />
         </Link>
@@ -89,7 +88,7 @@ function Home() {
 
 function FeatureCard({ icon, title, description }) {
   return (
-    <div className="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
+    <div className="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow transform hover:scale-105 transition duration-200 ease-in-out">
       <div className="mb-4">{icon}</div>
       <h3 className="text-xl font-semibold text-gray-900 mb-2">{title}</h3>
       <p className="text-gray-600">{description}</p>
@@ -99,7 +98,7 @@ function FeatureCard({ icon, title, description }) {
 
 function StepCard({ stepNumber, title, description }) {
   return (
-    <div className="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow text-center">
+    <div className="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow text-center transform hover:scale-105 transition duration-200 ease-in-out">
       <div className="text-2xl font-bold text-blue-600 mb-4">{stepNumber}</div>
       <h3 className="text-xl font-semibold text-gray-900 mb-2">{title}</h3>
       <p className="text-gray-600">{description}</p>
@@ -107,7 +106,6 @@ function StepCard({ stepNumber, title, description }) {
   );
 }
 
-// PropTypes for FeatureCard and StepCard
 FeatureCard.propTypes = {
   icon: PropTypes.node.isRequired,
   title: PropTypes.string.isRequired,

@@ -1,8 +1,8 @@
-import { LineChart, Activity, Heart, Brain, Scale } from 'lucide-react'; // Ensure you have the correct imports for these components
+import { LineChart, Activity, Heart, Brain, Scale } from 'lucide-react';
 
 function Dashboard() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 animate-fade-in">
       <header className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-gray-900">Health Dashboard</h1>
         <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
@@ -43,7 +43,7 @@ function Dashboard() {
       </div>
 
       {/* Health Score */}
-      <div className="bg-white p-6 rounded-xl shadow-sm">
+      <div className="bg-white p-6 rounded-xl shadow-sm animate-fade-in-up">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold text-gray-900">Health Score</h2>
           <LineChart className="h-5 w-5 text-gray-400" />
@@ -63,7 +63,7 @@ function Dashboard() {
       </div>
 
       {/* Recent Activities */}
-      <div className="bg-white p-6 rounded-xl shadow-sm">
+      <div className="bg-white p-6 rounded-xl shadow-sm animate-fade-in-up">
         <h2 className="text-xl font-semibold text-gray-900 mb-4">
           Recent Activities
         </h2>
@@ -80,7 +80,7 @@ function Dashboard() {
 // StatCard component
 function StatCard({ icon, title, value, trend, trendUp }) {
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm">
+    <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow transform hover:scale-105 transition duration-200 ease-in-out">
       <div className="flex items-center justify-between mb-4">
         {icon}
         <span
@@ -122,7 +122,7 @@ const activities = [
 // ActivityItem component
 function ActivityItem({ title, time, duration, calories }) {
   return (
-    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:shadow-md transform hover:scale-105 transition duration-200 ease-in-out">
       <div>
         <h3 className="font-medium text-gray-900">{title}</h3>
         <p className="text-sm text-gray-600">{time}</p>

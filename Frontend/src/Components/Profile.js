@@ -14,7 +14,7 @@ function Profile() {
   const [isEditing, setIsEditing] = useState(false);
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
+    <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
       {/* Header */}
       <div className="flex justify-between items-start">
         <div className="flex items-center gap-4">
@@ -35,7 +35,7 @@ function Profile() {
       </div>
 
       {/* Personal Information */}
-      <div className="bg-white rounded-xl shadow-sm p-6">
+      <div className="bg-white rounded-xl shadow-sm p-6 animate-fade-in-up">
         <h2 className="text-xl font-semibold text-gray-900 mb-6">
           Personal Information
         </h2>
@@ -80,7 +80,7 @@ function Profile() {
       </div>
 
       {/* Health Goals */}
-      <div className="bg-white rounded-xl shadow-sm p-6">
+      <div className="bg-white rounded-xl shadow-sm p-6 animate-fade-in-up">
         <h2 className="text-xl font-semibold text-gray-900 mb-6">
           Health Goals
         </h2>
@@ -107,7 +107,7 @@ function Profile() {
       </div>
 
       {/* Medical History */}
-      <div className="bg-white rounded-xl shadow-sm p-6">
+      <div className="bg-white rounded-xl shadow-sm p-6 animate-fade-in-up">
         <h2 className="text-xl font-semibold text-gray-900 mb-6">
           Medical History
         </h2>
@@ -123,7 +123,7 @@ function Profile() {
 
 function ProfileField({ icon, label, value, isEditing }) {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-3 hover:shadow-md transform hover:scale-105 transition duration-200 ease-in-out">
       {icon}
       <div className="flex-1">
         <label className="block text-sm text-gray-600">{label}</label>
@@ -143,7 +143,7 @@ function ProfileField({ icon, label, value, isEditing }) {
 
 function HealthGoal({ icon, title, progress, isEditing }) {
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-4 hover:shadow-md transform hover:scale-105 transition duration-200 ease-in-out">
       {icon}
       <div className="flex-1">
         <div className="flex justify-between mb-2">
@@ -186,7 +186,7 @@ const medicalHistory = [
 
 function MedicalHistoryItem({ condition, date, status, isEditing }) {
   return (
-    <div className="p-4 bg-gray-50 rounded-lg">
+    <div className="p-4 bg-gray-50 rounded-lg hover:shadow-md transform hover:scale-105 transition duration-200 ease-in-out">
       {isEditing ? (
         <div className="space-y-2">
           <input
