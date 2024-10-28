@@ -22,9 +22,13 @@ function Navbar({ isAuthenticated, onLogout }) {
           {/* Navigation Links */}
           <div className="flex space-x-8">
             <NavLink to="/home" icon={<Home className="h-5 w-5" />} text="Home" />
-            <NavLink to="/dashboard" icon={<LineChart className="h-5 w-5" />} text="Dashboard" />
-            <NavLink to="/chatbot" icon={<MessageSquare className="h-5 w-5" />} text="Chat" />
-            <NavLink to="/profile" icon={<User className="h-5 w-5" />} text="Profile" />
+            {isAuthenticated && (
+              <>
+                <NavLink to="/dashboard" icon={<LineChart className="h-5 w-5" />} text="Dashboard" />
+                <NavLink to="/chatbot" icon={<MessageSquare className="h-5 w-5" />} text="Chat" />
+                <NavLink to="/profile" icon={<User className="h-5 w-5" />} text="Profile" />
+              </>
+            )}
           </div>
 
           {/* Conditional Buttons */}

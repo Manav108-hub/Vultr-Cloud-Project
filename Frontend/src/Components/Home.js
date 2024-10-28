@@ -1,12 +1,14 @@
 import { ArrowRight, Activity, Heart, Brain, Stethoscope } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
+import GetStarted from './Getstarted'; // Import GetStarted component
 
 function Home() {
-  const navigate = useNavigate();
+  const [showGetStarted, setShowGetStarted] = useState(false); // Add state for toggle
 
-  const handleLoginSuccess = () => {
-    navigate('/register'); // Redirect to register after successful login
+  const toggleGetStarted = () => {
+    setShowGetStarted(!showGetStarted); // Toggle the visibility of GetStarted section
   };
 
   return (
@@ -21,14 +23,22 @@ function Home() {
           track your progress, and connect with healthcare professionals.
         </p>
         <div className="flex justify-center gap-4">
-          <Link
-            to="/getstarted"
+          <button
+            onClick={toggleGetStarted} // Toggle on button click
             className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 transform hover:scale-105"
           >
             Get Started <ArrowRight className="h-5 w-5" />
-          </Link>
+          </button>
         </div>
       </section>
+
+      {/* Conditionally Render GetStarted Component */}
+      {showGetStarted && (
+        <section className="mt-8 p-4 bg-gray-50 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Get Started</h2>
+          <GetStarted /> {/* Render the actual content */}
+        </section>
+      )}
 
       {/* Features Section */}
       <section className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">

@@ -62,14 +62,6 @@ const GetStarted = () => {
           icon={<FaCheckCircle />}
         />
       </div>
-
-      {/* Call to Action */}
-      <div className="mt-10">
-        <button className="bg-blue-600 text-white py-3 px-6 rounded-lg shadow hover:bg-blue-700 transition duration-200">
-          Sign Up Now
-        </button>
-      </div>
-
       {/* Testimonials */}
       <div className="mt-12">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">What Our Users Say</h2>

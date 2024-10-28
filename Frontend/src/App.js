@@ -33,21 +33,23 @@ const App = () => {
     <>
       <Navbar onLogout={handleLogout} isAuthenticated={isAuthenticated} />
       <Routes>
+        {/* Home route accessible to everyone */}
+        <Route path="/home" element={<Home />} />
+
         {isAuthenticated ? (
           <>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/chatbot" element={<ChatBot />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/report" element={<HealthReport />} />
-            <Route path="/home" element={<Home />} />
             <Route path="/getstarted" element={<Getstarted />} />
-            <Route path="*" element={<Navigate to="/home" />} />
+            <Route path="*" element={<Navigate to="/dashboard" />} />
           </>
         ) : (
           <>
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
             <Route path="/register" element={<Register />} />
-            <Route path="*" element={<Navigate to="/login" />} />
+            <Route path="*" element={<Navigate to="/home" />} />
           </>
         )}
       </Routes>
