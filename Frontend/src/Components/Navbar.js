@@ -14,7 +14,7 @@ function Navbar({ isAuthenticated, onLogout }) {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/home" className="flex items-center space-x-2">
             <Activity className="h-8 w-8 text-blue-600" />
             <span className="text-xl font-bold text-gray-800">HealthMate</span>
           </Link>
