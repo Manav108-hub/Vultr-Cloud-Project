@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: healthmate
+  labels:
+    app: healthmate
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: healthmate
+  template:
+    metadata:
+      labels:
+        app: healthmate
+    spec:
+      containers:
+      - name: healthmate
+        image: manav108/test:latest
+        ports:
+        - containerPort: 80
