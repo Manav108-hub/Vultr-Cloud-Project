@@ -1,0 +1,43 @@
+# Use the official PHP image with CLI
+FROM php:8.2-cli AS php-base
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    git \
+    unzip \
+    curl \
+    libsqlite3-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install gd \
+    && apt-get install -y libxml2-dev \
+    && docker-php-ext-install dom xml \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set the working directory
+WORKDIR /var/www
+
+# Copy the application code
+COPY . .
+
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Install Laravel dependencies
+RUN composer install --no-interaction --optimize-autoloader --prefer-dist
+
+# Install Node.js and npm
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs
+
+# Install npm packages and build assets
+RUN npm install && npm run build
+
+# Expose the port for the Laravel server
+EXPOSE 8000
+
+# Start the Laravel application
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
