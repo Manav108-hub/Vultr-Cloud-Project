@@ -16,11 +16,14 @@ class AuthController extends Controller
 
     public function login(Request $request) {
         $request->validate([
-            'email' => 'required|string|email',
+            'email' => 'required|email',
             'password' => 'required'
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'))) {
+        $user = Users::where('email', $request->email)->first();
+
+        if ($user && Hash::check($request->password, $user->password)) {
+            Auth::login($user);
             return redirect()->intended('/');
         }
 
@@ -35,7 +38,7 @@ class AuthController extends Controller
     public function register(Request $request) {
         $request->validate([
             'full_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:healthmate_users',
             'password' => 'required|string|min:8|confirmed',
             'birth_date' => 'required|date',
             'phone_no' => 'nullable|string',
