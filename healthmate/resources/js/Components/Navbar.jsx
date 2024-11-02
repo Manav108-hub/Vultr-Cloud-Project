@@ -1,10 +1,10 @@
 import { Activity, Home, LineChart, MessageSquare, User } from 'lucide-react';
-import { Link } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 
 export default function NavBar({ isAuthenticated, onLogout }) {
     const handleLogout = () => {
         onLogout();
-        navigate('/login');
+        router.post('/login');
       };
     return (
         <nav className="bg-white shadow-lg">
@@ -40,13 +40,13 @@ export default function NavBar({ isAuthenticated, onLogout }) {
             ) : (
               <>
                 <Link
-                  to="/login"  // Login route
+                  href="/auth/login"  // Login route
                   className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                 >
                   Login
                 </Link>
                 <Link
-                  to="/register"  // Change to Register route
+                  href="/auth/register"  // Change to Register route
                   className="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors"
                 >
                   Sign Up
