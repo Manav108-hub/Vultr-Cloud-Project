@@ -30,6 +30,7 @@ export default function Welcome() {
                 Get Started <ArrowRight className="h-5 w-5" />
             </button>
             </div>
+            <Link href='/about'>Hello</Link>
             </section>
            </div>
            {/* Conditionally Render GetStarted Component */}
