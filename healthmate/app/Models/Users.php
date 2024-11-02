@@ -6,9 +6,10 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use Laravel\Sanctum\HasApiTokens;
 
 class Users extends Authenticatable {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     protected $table = 'healthmate_users';
 
