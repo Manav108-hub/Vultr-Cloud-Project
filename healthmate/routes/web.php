@@ -1,11 +1,15 @@
 <?php
 
-use App\Http\Controllers\AboutController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\UserHealthDetailsController;
+use App\Http\Controllers\MedicineHistoryController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -24,11 +28,12 @@ Route::get('auth/register', [AuthController::class, 'showRegister'])->name('regi
 Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/about', [AboutController::class, 'index'])->name('about');
-
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    $activities = \App\Models\Activities::all(); // Fetch activities from the database
+    return Inertia::render('Dashboard', [
+        'activities' => $activities,
+    ]);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -36,4 +41,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+
+
+Route::resource('activities', ActivityController::class);
+Route::apiResource('activities', ActivityController::class);
+Route::apiResource('user-health-details', UserHealthDetailsController::class);
+Route::apiResource('medicine-history', MedicineHistoryController::class);
+
+
+
+
+require __DIR__ . '/auth.php';
