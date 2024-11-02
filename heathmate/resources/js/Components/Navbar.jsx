@@ -1,17 +1,14 @@
-import { Link, useNavigate } from 'react-router-dom';
 import { Activity, Home, LineChart, MessageSquare, User } from 'lucide-react';
+import { Link } from '@inertiajs/react';
 
-function Navbar({ isAuthenticated, onLogout }) {
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    onLogout();
-    navigate('/login');
-  };
-
-  return (
-    <nav className="bg-white shadow-lg">
-      <div className="container mx-auto px-4">
+export default function NavBar({ isAuthenticated, onLogout }) {
+    const handleLogout = () => {
+        onLogout();
+        navigate('/login');
+      };
+    return (
+        <nav className="bg-white shadow-lg">
+      <div className="container mx-auto">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/home" className="flex items-center space-x-2">
@@ -60,19 +57,17 @@ function Navbar({ isAuthenticated, onLogout }) {
         </div>
       </div>
     </nav>
-  );
+    )
 }
 
 function NavLink({ to, icon, text }) {
-  return (
-    <Link
-      to={to}
-      className="flex items-center space-x-1 px-3 py-2 rounded-md transition-colors text-gray-600 hover:text-blue-600 hover:bg-blue-50"
-    >
-      {icon}
-      <span>{text}</span>
-    </Link>
-  );
-}
-
-export default Navbar;
+    return (
+      <Link
+        to={to}
+        className="flex items-center space-x-1 px-3 py-2 rounded-md transition-colors text-gray-600 hover:text-blue-600 hover:bg-blue-50"
+      >
+        {icon}
+        <span>{text}</span>
+      </Link>
+    );
+  }
