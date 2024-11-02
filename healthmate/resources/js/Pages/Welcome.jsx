@@ -1,8 +1,8 @@
-import NavBar from '@/Components/Navbar';
 import { Head, Link } from '@inertiajs/react';
 import { ArrowRight, Activity, Heart, Brain, Stethoscope } from 'lucide-react';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import Layout from "@/Layouts/Layout.jsx";
 
 export default function Welcome() {
     const [showGetStarted, setShowGetStarted] = useState(false);
@@ -10,9 +10,8 @@ export default function Welcome() {
         setShowGetStarted(!showGetStarted);
     }
     return (
-        <>
+        <Layout>
             <Head title="Welcome" />
-            <NavBar />
            <div className='container flex mx-auto justify-center animate-fade-in mt-8'>
             <section className="text-center space-y-8">
                 <h1 className="text-5xl font-bold text-gray-900">
@@ -30,7 +29,6 @@ export default function Welcome() {
                 Get Started <ArrowRight className="h-5 w-5" />
             </button>
             </div>
-            <Link href='/about'>Hello</Link>
             </section>
            </div>
            {/* Conditionally Render GetStarted Component */}
@@ -42,7 +40,7 @@ export default function Welcome() {
       )}
 
       {/* Features Section */}
-      <section className="container mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
+      <section className="container mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8 mb-8">
         <FeatureCard
           icon={<Activity className="h-8 w-8 text-blue-600" />}
           title="Health Tracking"
@@ -64,8 +62,35 @@ export default function Welcome() {
           description="Direct access to healthcare professionals"
         />
       </section>
+            {/* How It Works Section */}
+            <section className="text-center space-y-8 animate-fade-in">
+                <h2 className="text-3xl font-bold text-gray-900">How It Works</h2>
+                <p className="text-gray-600 max-w-xl mx-auto">
+                    HealthMate simplifies the way you track and manage your health. Here's how you can get started in just a few steps.
+                </p>
+                <div className="container mx-auto grid md:grid-cols-3 gap-8">
+                    <StepCard stepNumber="1" title="Sign Up" description="Create your free account in minutes." />
+                    <StepCard stepNumber="2" title="Set Goals" description="Choose your health goals and preferences." />
+                    <StepCard stepNumber="3" title="Track & Improve" description="Track your progress and get personalized insights." />
+                </div>
+            </section>
 
-        </>
+            {/* CTA Section */}
+            <section className="mt-8 bg-blue-50 rounded-2xl p-8 text-center animate-fade-in-up">
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                    Ready to start your health journey?
+                </h2>
+                <p className="text-gray-600 mb-6">
+                    Join thousands of users who have transformed their health with HealthMate
+                </p>
+                <Link
+                    to="/login"
+                    className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors transform hover:scale-105"
+                >
+                    Join Now <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+            </section>
+        </Layout>
     );
 }
 
@@ -78,7 +103,7 @@ function FeatureCard({ icon, title, description }) {
       </div>
     );
   }
-  
+
   function StepCard({ stepNumber, title, description }) {
     return (
       <div className="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow text-center transform hover:scale-105 transition duration-200 ease-in-out">
@@ -88,13 +113,13 @@ function FeatureCard({ icon, title, description }) {
       </div>
     );
   }
-  
+
   FeatureCard.propTypes = {
     icon: PropTypes.node.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
   };
-  
+
   StepCard.propTypes = {
     stepNumber: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
