@@ -13,7 +13,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
     return (
         <>
             <GuestLayout>
-                <Head title="Welcome" />
+                <Head title="Home" />
                 <div className='container flex mx-auto justify-center animate-fade-in mt-8'>
                     <section className="text-center space-y-8">
                         <h1 className="text-5xl font-bold text-gray-900">

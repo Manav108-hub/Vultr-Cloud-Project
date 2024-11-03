@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { usePage, router } from "@inertiajs/react";
+import GuestLayout from "@/Layouts/GuestLayout.jsx";
 
 const UserDetails = () => {
     const { user, details } = usePage().props;
@@ -22,6 +23,7 @@ const UserDetails = () => {
     };
 
     return (
+        <GuestLayout>
         <div className="container mx-auto">
             <h1 className="text-2xl font-bold mb-4">User Details</h1>
             <form onSubmit={handleSubmit}>
@@ -72,6 +74,7 @@ const UserDetails = () => {
                 <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">Save Details</button>
             </form>
         </div>
+        </GuestLayout>
     );
 };
 
