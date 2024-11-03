@@ -51,4 +51,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserDetails::class, 'user_id');
     }
+
+    public function healthDetails() {
+        return $this->hasOne(UserHealthDetails::class , 'healthmate_user_id');
+    }
 }

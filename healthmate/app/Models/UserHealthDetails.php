@@ -10,7 +10,10 @@ class UserHealthDetails extends Model
 {
     use HasFactory;
 
+    protected $table = 'user_health_details';
+
     protected $fillable = [
+        'id',
         'healthmate_user_id',
         'weight',
         'height',
@@ -20,9 +23,12 @@ class UserHealthDetails extends Model
         'sleep_score',
     ];
 
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     public function user()
     {
-        return $this->belongsTo(Medicinehistory::class, 'healthmate_user_id');
+        return $this->belongsTo(User::class, 'healthmate_user_id'. 'id');
     }
 
     public function activity(): \Illuminate\Database\Eloquent\Relations\HasMany
