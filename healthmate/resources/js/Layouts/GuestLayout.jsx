@@ -1,5 +1,3 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import { Link } from '@inertiajs/react';
 import NavBar from "@/Components/Navbar.jsx";
 import Footer from "@/Components/Footer.jsx";
 import React from "react";
