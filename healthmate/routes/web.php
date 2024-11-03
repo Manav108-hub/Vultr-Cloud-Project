@@ -5,6 +5,8 @@ use App\Http\Controllers\Users\UserDetailsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\Users\UserHealthDetailsController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -28,6 +30,11 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/details', [UserDetailsController::class, 'show'])->name('user.details');
     Route::post('/user/details/update', [UserDetailsController::class, 'update'])->name('user.details.update');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::post('/user/health/details/update', [UserHealthDetailsController::class, 'update'])->name('user.health.details.update');
+    Route::get('/user/health/details', [UserHealthDetailsController::class, 'show'])->name('user.health.details');
 });
 
 require __DIR__.'/auth.php';
