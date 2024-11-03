@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\UserHealthDetailsController;
 
-class Activities extends Model
+class Activity extends Model
 {
     use HasFactory;
 
@@ -23,7 +23,7 @@ class Activities extends Model
         'calories_burn',
     ];
 
-    public function userHealthDetails()
+    public function userHealthDetails(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(UserHealthDetails::class, 'user_health_details_id');
     }

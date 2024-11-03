@@ -25,8 +25,8 @@ class UserHealthDetails extends Model
         return $this->belongsTo(Medicinehistory::class, 'healthmate_user_id');
     }
 
-    public function activities()
+    public function activity(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Activities::class, 'user_health_details_id');
+        return $this->hasMany(Activity::class, 'user_health_details_id');
     }
 }

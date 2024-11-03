@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Medicinehistory extends Model
+class MedicineHistory extends Model
 {
     use HasFactory;
 
@@ -21,6 +21,6 @@ class Medicinehistory extends Model
 
     public function healthmateUser(): BelongsTo
     {
-        return $this->belongsTo(Users::class, 'healthmate_user_id');
+        return $this->belongsTo(User::class, 'healthmate_user_id');
     }
 }
