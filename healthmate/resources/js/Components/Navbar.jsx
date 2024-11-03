@@ -18,12 +18,12 @@ export default function NavBar({ onLogout }) {
 
                     {/* Navigation Links */}
                     <div className="flex space-x-8">
-                        <NavLink to="/home" icon={<Home className="h-5 w-5" />} text="Home" />
+                        <NavLink href="/" icon={<Home className="h-5 w-5" />} text="Home" />
                         {isAuthenticated && (
                             <>
-                                <NavLink to="/dashboard" icon={<LineChart className="h-5 w-5" />} text="Dashboard" />
-                                <NavLink to="/chatbot" icon={<MessageSquare className="h-5 w-5" />} text="Chat" />
-                                <NavLink to="/profile" icon={<User className="h-5 w-5" />} text="Profile" />
+                                <NavLink href="/dashboard" icon={<LineChart className="h-5 w-5" />} text="Dashboard" />
+                                <NavLink href="/chatbot" icon={<MessageSquare className="h-5 w-5" />} text="Chat" />
+                                <NavLink href="/profile" icon={<User className="h-5 w-5" />} text="Profile" />
                             </>
                         )}
                     </div>
@@ -62,10 +62,10 @@ export default function NavBar({ onLogout }) {
     );
 }
 
-function NavLink({ to, icon, text }) {
+function NavLink({ href, icon, text }) {
     return (
         <Link
-            to={to}
+            href={href}
             className="flex items-center space-x-1 px-3 py-2 rounded-md transition-colors text-gray-600 hover:text-blue-600 hover:bg-blue-50"
         >
             {icon}
