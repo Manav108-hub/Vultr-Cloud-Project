@@ -1,25 +1,17 @@
 import { Activity, Home, LineChart, MessageSquare, User } from 'lucide-react';
-import { Link, router } from '@inertiajs/react';
-import Cookies from 'js-cookie'; // Import js-cookie to access cookies
+import { Link, router, usePage } from '@inertiajs/react';
 
 export default function NavBar({ onLogout }) {
-    // Check for token in cookies
-    const token = Cookies.get('token'); // Replace 'token' with the actual key name of your token
-    const isAuthenticated = Boolean(token); // Evaluate to true if the token exists
-
-    const handleLogout = () => {
-        onLogout();
-        // Clear the token if needed and redirect
-        Cookies.remove('token'); // Remove the token from cookies
-        router.post('/auth/login');
-    };
+    const user = usePage().props.auth.user;
+    const { auth } = usePage().props;
+    const isAuthenticated = auth.user !== null;
 
     return (
         <nav className="bg-white shadow-lg">
             <div className="container mx-auto">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
-                    <Link to="/home" className="flex items-center space-x-2">
+                    <Link href="/" className="flex items-center space-x-2">
                         <Activity className="h-8 w-8 text-blue-600" />
                         <span className="text-xl font-bold text-gray-800">HealthMate</span>
                     </Link>
@@ -39,22 +31,24 @@ export default function NavBar({ onLogout }) {
                     {/* Conditional Buttons */}
                     <div className="flex space-x-4">
                         {isAuthenticated ? (
-                            <button
-                                onClick={handleLogout}
+                            <Link
+                                href={route('logout')}
+                                method="post"
+                                as="button"
                                 className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors"
                             >
                                 Logout
-                            </button>
+                            </Link>
                         ) : (
                             <>
                                 <Link
-                                    href="/auth/login"
+                                    href="/login"
                                     className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                                 >
                                     Login
                                 </Link>
                                 <Link
-                                    href="/auth/register"
+                                    href="/register"
                                     className="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors"
                                 >
                                     Sign Up

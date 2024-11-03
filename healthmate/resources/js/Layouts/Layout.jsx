@@ -5,9 +5,7 @@ import Footer from "@/Components/Footer.jsx";
 export default function Layout({ children }) {
     return (
         <>
-            <NavBar />
-            {children}
-            <Footer />
+
         </>
     )
 }
