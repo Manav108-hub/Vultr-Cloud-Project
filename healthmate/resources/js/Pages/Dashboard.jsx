@@ -67,38 +67,38 @@ const Dashboard = ({ activities }) => {
                 <input type="hidden" value={activityId} />
                 <div>
                     <label>Activity Title:</label>
-                    <input 
-                        type="text" 
-                        value={title} 
-                        onChange={(e) => setTitle(e.target.value)} 
-                        required 
+                    <input
+                        type="text"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        required
                     />
                 </div>
                 <div>
                     <label>Time:</label>
-                    <input 
-                        type="time" 
-                        value={time} 
-                        onChange={(e) => setTime(e.target.value)} 
-                        required 
+                    <input
+                        type="time"
+                        value={time}
+                        onChange={(e) => setTime(e.target.value)}
+                        required
                     />
                 </div>
                 <div>
                     <label>Duration (minutes):</label>
-                    <input 
-                        type="number" 
-                        value={duration} 
-                        onChange={(e) => setDuration(e.target.value)} 
-                        required 
+                    <input
+                        type="number"
+                        value={duration}
+                        onChange={(e) => setDuration(e.target.value)}
+                        required
                     />
                 </div>
                 <div>
                     <label>Calories Burned:</label>
-                    <input 
-                        type="number" 
-                        value={caloriesBurn} 
-                        onChange={(e) => setCaloriesBurn(e.target.value)} 
-                        required 
+                    <input
+                        type="number"
+                        value={caloriesBurn}
+                        onChange={(e) => setCaloriesBurn(e.target.value)}
+                        required
                     />
                 </div>
                 <button type="submit">{activityId ? 'Update Activity' : 'Add Activity'}</button>
@@ -108,7 +108,7 @@ const Dashboard = ({ activities }) => {
             <ul>
                 {activities.map(activity => (
                     <li key={activity.id}>
-                        {activity.title} - {activity.time} - {activity.duration} min - {activity.calories_burn} cal 
+                        {activity.title} - {activity.time} - {activity.duration} min - {activity.calories_burn} cal
                         <button onClick={() => handleEdit(activity.id)}>Edit</button>
                         <button onClick={() => handleDelete(activity.id)}>Delete</button>
                     </li>
