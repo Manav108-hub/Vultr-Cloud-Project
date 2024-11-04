@@ -7,12 +7,12 @@ export default function HealthDashboard() {
     const { user, details } = usePage().props;
 
     const [formData, setFormData] = React.useState({
-        weight: details?.weight || '',
-        height: details?.height || '',
-        activity_level: details?.activity_level || '',
-        daily_steps: details?.daily_steps || '',
-        heart_rate: details?.heart_rate || '',
-        sleep_score: details?.sleep_score || '',
+        weight: details?.weight || 0,
+        height: details?.height || 0,
+        activity_level: details?.activity_level || 0,
+        daily_steps: details?.daily_steps || 0,
+        heart_rate: details?.heart_rate || 0,
+        sleep_score: details?.sleep_score || 0,
     });
 
     const [isEditing, setIsEditing] = React.useState(false);
@@ -58,30 +58,30 @@ export default function HealthDashboard() {
                     <StatCard
                         icon={<Heart className="h-6 w-6 text-red-500" />}
                         title="Heart Rate"
-                        value={`${details.heart_rate || "N/A"} BPM`}
-                        trend={calculateTrend(details.heart_rate, lastValues.heart_rate)}
-                        trendUp={details.heart_rate > lastValues.heart_rate}
+                        value={`${formData.heart_rate} BPM`} // Use formData here
+                        trend={calculateTrend(formData.heart_rate, lastValues.heart_rate)}
+                        trendUp={formData.heart_rate > lastValues.heart_rate}
                     />
                     <StatCard
                         icon={<Activity className="h-6 w-6 text-green-500" />}
                         title="Daily Steps"
-                        value={details.daily_steps || "N/A"}
-                        trend={calculateTrend(details.daily_steps, lastValues.daily_steps)}
-                        trendUp={details.daily_steps > lastValues.daily_steps}
+                        value={formData.daily_steps} // Use formData here
+                        trend={calculateTrend(formData.daily_steps, lastValues.daily_steps)}
+                        trendUp={formData.daily_steps > lastValues.daily_steps}
                     />
                     <StatCard
                         icon={<Brain className="h-6 w-6 text-purple-500" />}
                         title="Sleep Score"
-                        value={`${details.sleep_score || "N/A"}%`}
-                        trend={calculateTrend(details.sleep_score, lastValues.sleep_score)}
-                        trendUp={details.sleep_score > lastValues.sleep_score}
+                        value={`${formData.sleep_score}%`} // Use formData here
+                        trend={calculateTrend(formData.sleep_score, lastValues.sleep_score)}
+                        trendUp={formData.sleep_score > lastValues.sleep_score}
                     />
                     <StatCard
                         icon={<Scale className="h-6 w-6 text-blue-500" />}
                         title="Weight"
-                        value={`${details.weight || "N/A"} kg`}
-                        trend={calculateTrend(details.weight, lastValues.weight)}
-                        trendUp={details.weight > lastValues.weight}
+                        value={`${formData.weight} kg`} // Use formData here
+                        trend={calculateTrend(formData.weight, lastValues.weight)}
+                        trendUp={formData.weight > lastValues.weight}
                     />
                 </div>
 
@@ -131,7 +131,7 @@ function StatCard({ icon, title, value, trend, trendUp }) {
                 </span>
             </div>
             <h3 className="text-gray-600 text-sm">{title}</h3>
-            <p className="text-2xl font-bold text-gray-900 mt-1">{value}</p>
+            <p className="text-2xl font-bold text-gray-900 mt-1">{value || '0'}</p> {/* Default to 0 if value is falsy */}
         </div>
     );
 }
