@@ -19,7 +19,7 @@ class UserHealthDetailsController extends Controller
         // Retrieve the health details using the healthmate_user_id
         $healthDetails = UserHealthDetails::where('healthmate_user_id', $user->id)->first();
 
-        return inertia("HealthDashboard", [
+        return inertia("Dashboard", [
             'user' => $user,
             'details' => $healthDetails
         ]);
@@ -65,6 +65,6 @@ class UserHealthDetailsController extends Controller
         // Save the updated or new health details
         $userHealthDetails->save();
 
-        return redirect()->route('user.health.details', ['id' => $userHealthDetails->id])->with('success', 'Health details updated successfully!');
+        return redirect()->route('dashboard', ['id' => $userHealthDetails->id])->with('success', 'Health details updated successfully!');
     }
 }

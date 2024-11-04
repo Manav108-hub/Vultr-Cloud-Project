@@ -17,10 +17,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -33,8 +29,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::post('/user/health/details/update', [UserHealthDetailsController::class, 'update'])->name('user.health.details.update');
-    Route::get('/user/health/details', [UserHealthDetailsController::class, 'show'])->name('user.health.details');
+    Route::post('/dashboard/update', [UserHealthDetailsController::class, 'update'])->name('dashboard.update');
+    Route::get('/dashboard', [UserHealthDetailsController::class, 'show'])->name('dashboard');
 });
 
 require __DIR__.'/auth.php';
