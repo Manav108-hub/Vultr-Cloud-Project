@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatBotController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Users\UserDetailsController;
 use Illuminate\Foundation\Application;
@@ -31,6 +32,10 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/dashboard/update', [UserHealthDetailsController::class, 'update'])->name('dashboard.update');
     Route::get('/dashboard', [UserHealthDetailsController::class, 'show'])->name('dashboard');
+});
+
+Route::get('/chat', function () {
+    return Inertia::render('Chatbot');
 });
 
 require __DIR__.'/auth.php';
