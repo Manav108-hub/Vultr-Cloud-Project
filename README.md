@@ -13,9 +13,11 @@ HealthMate website powering itself with Laravel React framework deploying on Vul
 ```bash
 # Install composer modules
 composer install
+composer install --ignore-platform-req=ext-http   #if getting ext-http error
 
 # update composer modules
 composer update
+composer update --ignore-platform-req=ext-http   #if getting ext-http error
 
 # Install node packages
 npm install
