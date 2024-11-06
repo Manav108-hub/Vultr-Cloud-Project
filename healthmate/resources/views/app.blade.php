@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="HealthMate - Your AI-powered health assistant. Get instant health insights and personalized advice." />
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
