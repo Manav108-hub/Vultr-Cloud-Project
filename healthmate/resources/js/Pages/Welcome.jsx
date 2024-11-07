@@ -41,7 +41,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     </section>
                 )}
                 {/* Features Section */}
-                <section className="container mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8 mb-8">
+                <section className="container mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8 mb-8 px-4 md:px-0">
                     <FeatureCard
                         icon={<Activity className="h-8 w-8 text-blue-600" />}
                         title="Health Tracking"
@@ -69,7 +69,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     <p className="text-gray-600 max-w-xl mx-auto">
                         HealthMate simplifies the way you track and manage your health. Here's how you can get started in just a few steps.
                     </p>
-                    <div className="container mx-auto grid md:grid-cols-3 gap-8">
+                    <div className="container mx-auto grid md:grid-cols-3 gap-8 px-4 md:px-0">
                         <StepCard stepNumber="1" title="Sign Up" description="Create your free account in minutes." />
                         <StepCard stepNumber="2" title="Set Goals" description="Choose your health goals and preferences." />
                         <StepCard stepNumber="3" title="Track & Improve" description="Track your progress and get personalized insights." />

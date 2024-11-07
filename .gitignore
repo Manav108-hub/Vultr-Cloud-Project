@@ -3,3 +3,5 @@ vendors
 .vscode
 .idea
 
+*kubeconfig*
+vke*

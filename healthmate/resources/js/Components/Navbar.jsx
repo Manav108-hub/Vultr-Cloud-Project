@@ -8,7 +8,7 @@ export default function NavBar({ onLogout }) {
 
     return (
         <nav className="bg-white shadow-lg">
-            <div className="container mx-auto">
+            <div className="container mx-auto px-4 md:px-0">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
                     <Link href="/" className="flex items-center space-x-2">
