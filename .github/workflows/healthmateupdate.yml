@@ -48,20 +48,18 @@ jobs:
 
       #- name: Delete existing deployment (if any)
       # run: |
-      #   kubectl delete deployment healthmate-app --ignore-not-found  # Clean up old deployments
+      #   kubectl delete deployment healthmate-app --ignore-not-found
   
       - name: Update Docker image in deployment YAML
         run: |
           sed -i "s|image: ${DOCKER_IMAGE}:.*|image: ${DOCKER_IMAGE}:${{ github.sha }}|g" ./k8s/deployment.yml
-          # Update the Docker image version in the deployment.yml file
   
       - name: Deploy to Kubernetes
         run: |
           kubectl apply -f ./k8s/  # Apply the updated Kubernetes configuration
-      #   kubectl rollout status deployment/healthmate-app --timeout=60s  # Wait for the deployment to finish
+      #   kubectl rollout status deployment/healthmate-app --timeout=60s
   
       - name: Verify the deployment status
         run: |
-          kubectl get pods  # Check the status of the pods after deployment
-          kubectl get deployments  # Ensure the deployment is running
-          kubectl get svc
+          kubectl get pods
+          kubectl get deployments
