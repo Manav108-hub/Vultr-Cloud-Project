@@ -58,7 +58,7 @@ jobs:
       - name: Deploy to Kubernetes
         run: |
           kubectl apply -f ./k8s/  # Apply the updated Kubernetes configuration
-          kubectl rollout status deployment/healthmate-app --timeout=60s  # Wait for the deployment to finish
+      #   kubectl rollout status deployment/healthmate-app --timeout=60s  # Wait for the deployment to finish
   
       - name: Verify the deployment status
         run: |
