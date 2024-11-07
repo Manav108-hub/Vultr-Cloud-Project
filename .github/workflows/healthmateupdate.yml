@@ -46,9 +46,9 @@ jobs:
         run: |
           echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
 
-      - name: Delete existing deployment (if any)
-        run: |
-          kubectl delete deployment healthmate-app --ignore-not-found  # Clean up old deployments
+      #- name: Delete existing deployment (if any)
+      # run: |
+      #   kubectl delete deployment healthmate-app --ignore-not-found  # Clean up old deployments
   
       - name: Update Docker image in deployment YAML
         run: |
