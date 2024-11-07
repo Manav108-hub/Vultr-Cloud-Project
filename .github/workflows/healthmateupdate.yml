@@ -46,9 +46,9 @@ jobs:
         run: |
           echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
 
-      #- name: Delete existing deployment (if any)
-      # run: |
-      #   kubectl delete deployment healthmate-app --ignore-not-found
+      - name: Delete existing deployment (if any)
+        run: |
+          kubectl delete deployment healthmate-app --ignore-not-found
   
       - name: Update Docker image in deployment YAML
         run: |
@@ -57,7 +57,7 @@ jobs:
       - name: Deploy to Kubernetes
         run: |
           kubectl apply -f ./k8s/  # Apply the updated Kubernetes configuration
-      #   kubectl rollout status deployment/healthmate-app --timeout=60s
+          kubectl rollout status deployment/healthmate-app --timeout=60s
   
       - name: Verify the deployment status
         run: |
