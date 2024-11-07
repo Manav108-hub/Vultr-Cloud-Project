@@ -64,3 +64,4 @@ jobs:
         run: |
           kubectl get pods  # Check the status of the pods after deployment
           kubectl get deployments  # Ensure the deployment is running
+          kubectl get svc
