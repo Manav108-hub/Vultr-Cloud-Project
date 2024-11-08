@@ -32,13 +32,22 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/dashboard/update', [UserHealthDetailsController::class, 'update'])->name('dashboard.update');
     Route::get('/dashboard', [UserHealthDetailsController::class, 'show'])->name('dashboard');
+
+    // Route::post('/api/chat/stream', [ChatBotController::class, 'streamMessage']);
 });
 
 Route::get('/chat', function () {
     return Inertia::render('Chatbot');
 });
 
-Route::post('/api/chat/stream', [ChatBotController::class, 'streamMessage']);
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/chat', function () {
+        return Inertia::render('Chatbot');
+    });
+
+    Route::post('/api/chat/stream', [ChatBotController::class, 'streamMessage']);
+});
+
 
 
 require __DIR__.'/auth.php';

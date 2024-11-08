@@ -1,5 +1,7 @@
+// Import necessary libraries and components
 import React, { useState } from 'react';
 import axios from 'axios';
+import Navbar from '../Components/Navbar'; // Importing Navbar from Navbar.jsx
 
 const Chatbot = () => {
     const [messages, setMessages] = useState([]);
@@ -48,47 +50,50 @@ const Chatbot = () => {
     };
 
     return (
-        <div className="max-w-2xl mx-auto p-4">
-            {error && (
-                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                    <span className="block sm:inline">{error}</span>
-                </div>
-            )}
-
-            <div className="bg-white rounded-lg shadow mb-4 p-4 h-96 overflow-y-auto">
-                {messages.map((message, index) => (
-                    <div
-                        key={index}
-                        className={`mb-4 p-3 rounded-lg ${
-                            message.role === 'user'
-                                ? 'bg-blue-100 ml-auto max-w-[80%]'
-                                : message.role === 'system'
-                                    ? 'bg-red-100 mx-auto max-w-[90%]'
-                                    : 'bg-gray-100 mr-auto max-w-[80%]'
-                        }`}
-                    >
-                        <p className="text-gray-800">{message.content}</p>
+        <div>
+            <Navbar /> {/* This will include the Navbar component at the top of the page */}
+            <div className="max-w-2xl mx-auto p-4">
+                {error && (
+                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                        <span className="block sm:inline">{error}</span>
                     </div>
-                ))}
-            </div>
+                )}
 
-            <form onSubmit={handleSendMessage} className="flex gap-2">
-                <input
-                    type="text"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    className="flex-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    placeholder="Type your message..."
-                    disabled={isLoading}
-                />
-                <button
-                    type="submit"
-                    className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-400"
-                    disabled={isLoading}
-                >
-                    {isLoading ? 'Sending...' : 'Send'}
-                </button>
-            </form>
+                <div className="bg-white rounded-lg shadow mb-4 p-4 h-96 overflow-y-auto">
+                    {messages.map((message, index) => (
+                        <div
+                            key={index}
+                            className={`mb-4 p-3 rounded-lg ${
+                                message.role === 'user'
+                                    ? 'bg-blue-100 ml-auto max-w-[80%]'
+                                    : message.role === 'system'
+                                        ? 'bg-red-100 mx-auto max-w-[90%]'
+                                        : 'bg-gray-100 mr-auto max-w-[80%]'
+                            }`}
+                        >
+                            <p className="text-gray-800">{message.content}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <form onSubmit={handleSendMessage} className="flex gap-2">
+                    <input
+                        type="text"
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        className="flex-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        placeholder="Type your message..."
+                        disabled={isLoading}
+                    />
+                    <button
+                        type="submit"
+                        className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-400"
+                        disabled={isLoading}
+                    >
+                        {isLoading ? 'Sending...' : 'Send'}
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };
