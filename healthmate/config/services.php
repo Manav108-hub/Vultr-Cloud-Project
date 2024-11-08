@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'vultr' => [
+        'api_url' => env('VULTR_API_URL', 'https://api.vultrinference.com/v1/chat/completions'),
+        'token' => env('VULTR_API_TOKEN'),
+    ],
+
+
 ];

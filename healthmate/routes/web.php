@@ -38,4 +38,7 @@ Route::get('/chat', function () {
     return Inertia::render('Chatbot');
 });
 
+Route::post('/api/chat/stream', [ChatBotController::class, 'streamMessage']);
+
+
 require __DIR__.'/auth.php';

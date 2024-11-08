@@ -2,29 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use http\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class ChatBotController extends Controller
 {
-    //
     public function streamMessage(Request $request)
     {
         try {
-            // Validate the request
+            // Validate the incoming request
             $request->validate([
                 'message' => 'required|string|max:1000',
             ]);
 
-            // Initialize Guzzle client
+            // Initialize Guzzle client and prepare the API call
             $client = new Client();
-            $url = 'https://api.vultrinference.com/v1/chat/completions';
-
+            $url = config('services.vultr.api_url');
             $headers = [
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer HSMYDX2XL5YJHTE5O77VFOCPJA5DF6F2GFDQ',
+                'Authorization' => 'Bearer ' . config('services.vultr.token'),
             ];
 
             $body = [
@@ -34,45 +32,52 @@ class ChatBotController extends Controller
                     ['role' => 'user', 'content' => $request->input('message')],
                 ],
                 'max_tokens' => 512,
-                'stream' => false, // Changed to false for simpler handling
+                'stream' => false,
             ];
 
-            // Make the API call
+            // Make the API request
             $response = $client->request('POST', $url, [
                 'headers' => $headers,
                 'json' => $body,
             ]);
 
-            // Get the response content
+            // Decode and handle the response
             $responseBody = json_decode($response->getBody()->getContents(), true);
 
-            // Return the response
+            // Log response for troubleshooting
+            Log::info('API Response:', [
+                'status' => $response->getStatusCode(),
+                'response_body' => $responseBody,
+            ]);
+
+            // Return response or error message
             return response()->json([
-                'chunk' => $responseBody['choices'][0]['message']['content'] ?? 'No response generated'
+                'chunk' => $responseBody['choices'][0]['message']['content'] ?? 'No response generated',
             ]);
 
         } catch (GuzzleException $e) {
-            Log::error('Guzzle Error in ChatBot:', [
+            Log::error('Guzzle Exception in ChatBot:', [
                 'message' => $e->getMessage(),
                 'code' => $e->getCode(),
-                'user_message' => $request->input('message')
+                'response_body' => $e->getResponse() ? (string) $e->getResponse()->getBody() : 'No response body',
+                'user_message' => $request->input('message'),
             ]);
 
             return response()->json([
                 'error' => 'Failed to communicate with AI service',
-                'details' => $e->getMessage()
+                'details' => $e->getMessage(),
             ], 500);
 
         } catch (\Exception $e) {
-            Log::error('General Error in ChatBot:', [
+            Log::error('General Exception in ChatBot:', [
                 'message' => $e->getMessage(),
                 'code' => $e->getCode(),
-                'user_message' => $request->input('message')
+                'user_message' => $request->input('message'),
             ]);
 
             return response()->json([
                 'error' => 'An unexpected error occurred',
-                'details' => $e->getMessage()
+                'details' => $e->getMessage(),
             ], 500);
         }
     }

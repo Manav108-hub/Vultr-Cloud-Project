@@ -12,3 +12,5 @@ Route::get('/user', function (Request $request) {
 Route::middleware(['api'])->group(function () {
     Route::post('/chat/stream', [ChatBotController::class, 'streamMessage']);
 });
+
+Route::post('/chat/stream', [ChatBotController::class, 'streamMessage']);
