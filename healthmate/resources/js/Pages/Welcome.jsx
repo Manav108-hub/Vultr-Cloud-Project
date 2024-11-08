@@ -2,14 +2,8 @@ import { Head, Link } from '@inertiajs/react';
 import GuestLayout from "@/Layouts/GuestLayout.jsx";
 import { ArrowRight, Activity, Heart, Brain, Stethoscope } from 'lucide-react';
 import PropTypes from 'prop-types';
-import {useState} from "react";
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
-    const [showGetStarted, setShowGetStarted] = useState(false);
-    const toggleGetStarted = () => {
-        setShowGetStarted(!showGetStarted);
-    }
-
     return (
         <>
             <GuestLayout>
@@ -24,22 +18,17 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                             track your progress, and connect with healthcare professionals.
                         </p>
                         <div className="flex justify-center gap-4">
-                            <button
-                                onClick={toggleGetStarted} // Toggle on button click
+                            {/* Redirect to signup page */}
+                            <Link
+                                href="/register"  // Make sure this path is correct
                                 className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 transform hover:scale-105"
                             >
                                 Get Started <ArrowRight className="h-5 w-5" />
-                            </button>
+                            </Link>
                         </div>
                     </section>
                 </div>
-                {/* Conditionally Render GetStarted Component */}
-                {showGetStarted && (
-                    <section className="mt-8 p-4 bg-gray-50 rounded-lg shadow-md">
-                        <h2 className="text-2xl font-bold text-gray-900 mb-4">Get Started</h2>
-                        <GetStarted /> {/* Render the actual content */}
-                    </section>
-                )}
+
                 {/* Features Section */}
                 <section className="container mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8 mb-8">
                     <FeatureCard
@@ -63,6 +52,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         description="Direct access to healthcare professionals"
                     />
                 </section>
+
                 {/* How It Works Section */}
                 <section className="text-center space-y-8 animate-fade-in">
                     <h2 className="text-3xl font-bold text-gray-900">How It Works</h2>
@@ -85,7 +75,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         Join thousands of users who have transformed their health with HealthMate
                     </p>
                     <Link
-                        to="/login"
+                        href="/login"
                         className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors transform hover:scale-105"
                     >
                         Join Now <ArrowRight className="ml-2 h-5 w-5" />
