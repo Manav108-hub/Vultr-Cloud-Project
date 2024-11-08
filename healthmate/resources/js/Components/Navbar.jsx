@@ -22,7 +22,7 @@ export default function NavBar({ onLogout }) {
                         {isAuthenticated && (
                             <>
                                 <NavLink href="/dashboard" icon={<LineChart className="h-5 w-5" />} text="Dashboard" />
-                                <NavLink href="/chatbot" icon={<MessageSquare className="h-5 w-5" />} text="Chat" />
+                                <NavLink href="/chat" icon={<MessageSquare className="h-5 w-5" />} text="Chat" />
                                 <NavLink href="/profile" icon={<User className="h-5 w-5" />} text="Profile" />
                             </>
                         )}
