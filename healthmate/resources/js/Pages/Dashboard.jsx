@@ -9,7 +9,7 @@ export default function HealthDashboard() {
     const [formData, setFormData] = React.useState({
         weight: details?.weight || 0,
         height: details?.height || 0,
-        activity_level: details?.activity_level || 0,
+        activity_level: String(details?.activity_level || ''), // Ensure activity_level is a string
         daily_steps: details?.daily_steps || 0,
         heart_rate: details?.heart_rate || 0,
         sleep_score: details?.sleep_score || 0,
@@ -20,7 +20,7 @@ export default function HealthDashboard() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setFormData({ ...formData, [name]: name === 'activity_level' ? String(value) : value }); // Convert activity_level to string
     };
 
     const handleEdit = () => {
@@ -30,8 +30,8 @@ export default function HealthDashboard() {
     const handleSubmit = (e) => {
         e.preventDefault();
         router.post('dashboard/update', formData);
-        setLastValues(formData);  // Update last known values
-        setIsEditing(false);       // Disable editing after saving
+        setLastValues(formData); // Update last known values
+        setIsEditing(false); // Disable editing after saving
     };
 
     const calculateTrend = (currentValue, lastValue) => {
@@ -58,28 +58,28 @@ export default function HealthDashboard() {
                     <StatCard
                         icon={<Heart className="h-6 w-6 text-red-500" />}
                         title="Heart Rate"
-                        value={`${formData.heart_rate} BPM`} // Use formData here
+                        value={`${formData.heart_rate} BPM`}
                         trend={calculateTrend(formData.heart_rate, lastValues.heart_rate)}
                         trendUp={formData.heart_rate > lastValues.heart_rate}
                     />
                     <StatCard
                         icon={<Activity className="h-6 w-6 text-green-500" />}
                         title="Daily Steps"
-                        value={formData.daily_steps} // Use formData here
+                        value={formData.daily_steps}
                         trend={calculateTrend(formData.daily_steps, lastValues.daily_steps)}
                         trendUp={formData.daily_steps > lastValues.daily_steps}
                     />
                     <StatCard
                         icon={<Brain className="h-6 w-6 text-purple-500" />}
                         title="Sleep Score"
-                        value={`${formData.sleep_score}%`} // Use formData here
+                        value={`${formData.sleep_score}%`}
                         trend={calculateTrend(formData.sleep_score, lastValues.sleep_score)}
                         trendUp={formData.sleep_score > lastValues.sleep_score}
                     />
                     <StatCard
                         icon={<Scale className="h-6 w-6 text-blue-500" />}
                         title="Weight"
-                        value={`${formData.weight} kg`} // Use formData here
+                        value={`${formData.weight} kg`}
                         trend={calculateTrend(formData.weight, lastValues.weight)}
                         trendUp={formData.weight > lastValues.weight}
                     />
@@ -101,7 +101,7 @@ export default function HealthDashboard() {
                 </form>
             </div>
         </GuestLayout>
-    )
+    );
 }
 
 // InputField component for form fields
@@ -131,7 +131,7 @@ function StatCard({ icon, title, value, trend, trendUp }) {
                 </span>
             </div>
             <h3 className="text-gray-600 text-sm">{title}</h3>
-            <p className="text-2xl font-bold text-gray-900 mt-1">{value || '0'}</p> {/* Default to 0 if value is falsy */}
+            <p className="text-2xl font-bold text-gray-900 mt-1">{value || '0'}</p>
         </div>
     );
 }
