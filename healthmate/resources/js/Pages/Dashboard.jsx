@@ -9,7 +9,7 @@ export default function HealthDashboard() {
     const [formData, setFormData] = React.useState({
         weight: details?.weight || 0,
         height: details?.height || 0,
-        activity_level: String(details?.activity_level || ''), // Ensure activity_level is a string
+        activity_level: String(details?.activity_level || 'N/A'), // Ensure activity_level is a string
         daily_steps: details?.daily_steps || 0,
         heart_rate: details?.heart_rate || 0,
         sleep_score: details?.sleep_score || 0,
