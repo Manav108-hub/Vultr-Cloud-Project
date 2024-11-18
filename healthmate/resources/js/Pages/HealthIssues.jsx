@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
-import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
-import UpdatePasswordForm from './Partials/UpdatePasswordForm';
-import DeleteUserForm from './Partials/DeleteUserForm';
 import { Heart, Activity, Calendar } from 'lucide-react';
 
 export default function HealthIssues({ mustVerifyEmail, status }) {
